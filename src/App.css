@@ -1,24 +1,110 @@
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.box{
+  position:relative;
+}
+/*.oneLine{
+    margin-left:30px;
+    width:calc(100% - 30px);
+    background:#ccc;
+}*/
+.main {
+    width:100%;
+    border-spacing:0;
+    margin:0;
+}
+.main th{
+    height:30px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.main thead>tr{
+    background-color: rgba(255, 29, 80, 0.51);
+    border-bottom:1px solid black;
+
 }
 
-.App-intro {
-  font-size: large;
+.main  td{
+    valign:center;
+    width:calc(100%/ 4);
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+
+.main tr:hover{
+    background:#ccc;
 }
+
+.main tr:focus {
+    background: #6d9ecc;
+    outline: none;
+}
+
+
+
+
+
+.taskList{
+    text-align:left;
+    border:1px solid black;
+}
+
+.clear{
+    clear:both;
+}
+
+.addBtn{
+    margin:5px;
+    float:left;
+    width:20px;
+    height:20px;
+    line-height:20px;
+}
+
+.addForm{
+    position:relative;
+    box-sizing:inherit;
+    width:200px;
+    background-color:white;
+    border:1px solid black;
+    border-radius:15px;
+    float:left;
+    margin-top:-1px;
+    margin-right:-20px;
+    z-index:6;
+}
+
+.details{
+
+    padding-left:25px;
+    /*width:80%;*/
+    float:left;
+    width:80%;
+    text-align:left;
+    background-color: rgba(208, 91, 72, 0.51);
+    z-index:5;
+    margin:0;
+    position:relative;
+}
+
+
+
+.Btn {
+    background-color: #dadada;
+    border-radius:10px;
+    color:#fff;
+    border: 0;
+    font-weight:200;
+    text-transform:uppercase;
+    cursor:pointer;
+    text-decoration:none;
+}
+.Btn:hover { background: rgb(53, 167, 110); }
+
+.Btn:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+.Btn:focus {outline:none !important;}
