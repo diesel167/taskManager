@@ -25,6 +25,7 @@ export const deleteTask = (TaskForDelete) =>{
 export const editTask = (editTask,i) =>{
     return{
         type:"TASK_EDIT",
-        payload:editTask,i
+        payload:[editTask,i]
     }
 };
+

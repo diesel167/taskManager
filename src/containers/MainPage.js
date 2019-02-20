@@ -5,7 +5,8 @@ import {select} from '../actions/index.js'
 import {deleteTask} from '../actions/index.js'
 import {editTask} from '../actions/index.js'
 import AddTask from './AddTask.js'
-import Details from "./Details";
+import Details from "./Details.js";
+import EditTask from "./EditTask.js";
 
 
 class MainPage extends Component {
@@ -13,25 +14,29 @@ class MainPage extends Component {
     constructor() {
         super();
         this.state = {
-            addTaskVisible: false
+            addTaskVisible: false,
+            editTaskVisible: false
         };
         this.changeAddTaskVisible = this.changeAddTaskVisible.bind(this);
+        this.changeEditTaskVisible = this.changeEditTaskVisible.bind(this);
     }
 
-    showTask=()=>{
-        return(
-            this.props.tasksProp.tasks.map((task)=>{
-                return(
-                        <div key={task.task_id} onClick={()=>{this.props.select(task)}}>
-                            {task.task_title}
-                        </div>)
-            })
-        )
-    };
+
 
     //function for AddTask component for hiding itself after Submit click
     changeAddTaskVisible=()=>{
-        this.setState({addTaskVisible:!this.state.addTaskVisible});
+        this.setState({
+            addTaskVisible:!this.state.addTaskVisible,
+            editTaskVisible:false
+
+        });
+    };
+
+    changeEditTaskVisible=()=>{
+        this.setState({
+            editTaskVisible:!this.state.editTaskVisible,
+            addTaskVisible:false
+        });
     };
 
     createTable=()=>{
@@ -42,10 +47,19 @@ class MainPage extends Component {
             cells.push(<td>{task.task_title}</td>);
             cells.push(<td>{task.assignee}</td>);
             cells.push(<td>{task.deadline}</td>);
-            cells.push(<td><button onClick={()=>{
+            cells.push(<td><button className="Btn" onClick={()=>{
                 this.props.deleteTask(i);
-            }}>delete</button><button onClick={()=>{
-
+            }}>delete</button><button className="Btn" onClick={()=>{
+                this.setState({
+                    i:i,
+                    task_id:task.task_id,
+                    taskName: task.task_title,
+                    assignee: task.assignee,
+                    date: task.deadline,
+                    description: task.task_description,
+                    editTaskVisible: true,
+                    addTaskVisible: false,
+                });
 
             }}>edit</button></td>);
 
@@ -61,21 +75,44 @@ class MainPage extends Component {
     };
 
     render() {
+        console.log(!this.state.addTaskVisible||!this.state.editTaskVisible)
         return(
             <div className="box">
                 <div className="taskList">{this.createTable()}</div>
-                {
-                    !this.state.addTaskVisible
-                        ? <button className="Btn addBtn" onClick={()=>{
-                            this.setState({addTaskVisible:!this.state.addTaskVisible})}}>+</button>
-                        : <button className="Btn addBtn" onClick={()=>{
-                            this.setState({addTaskVisible:!this.state.addTaskVisible})}}>&#215;</button>
-                }
-                {
-                    this.state.addTaskVisible
-                        ? <div className="oneLine"><div className="addForm"><AddTask changeAddTaskVisible={this.changeAddTaskVisible}/></div><Details/><div className="clear"/></div>
-                        : <div className="oneLine"><Details/></div>
-                }
+                <div className="oneLine">
+                    {
+                        (!(this.state.addTaskVisible||this.state.editTaskVisible))
+                            ? <button className="Btn addBtn" onClick={()=>{
+                                this.setState({addTaskVisible:!this.state.addTaskVisible,
+                                               editTaskVisible:false})}}>+</button>
+                            : <button className="Btn addBtn" onClick={()=>{
+                                this.setState({addTaskVisible:false,
+                                               editTaskVisible:false})}}>&#215;</button>
+                    }
+                    <div className="clear"/>
+                    <Details/>
+                    {
+                        !this.state.editTaskVisible
+                            ?null:
+                                <div className="addForm">
+                                    <EditTask taskName={this.state.taskName}
+                                              changEditTaskVisible={this.changeEditTaskVisible}
+                                              i={this.state.i}
+                                              task_id={this.state.task_id}
+                                              assignee={this.state.assignee}
+                                              date={this.state.date}
+                                              description={this.state.description}/>
+                                </div>
+
+                    }
+                    {
+                        this.state.addTaskVisible
+                            ? <div className="addForm"><AddTask changeAddTaskVisible={this.changeAddTaskVisible}/></div>
+                            : null
+                    }
+
+                </div>
+
 
             </div>
         )

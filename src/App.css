@@ -6,11 +6,7 @@
 .box{
   position:relative;
 }
-/*.oneLine{
-    margin-left:30px;
-    width:calc(100% - 30px);
-    background:#ccc;
-}*/
+
 .main {
     width:100%;
     border-spacing:0;
@@ -21,29 +17,24 @@
 }
 
 .main thead>tr{
-    background-color: rgba(255, 29, 80, 0.51);
+    background-color: rgba(142, 170, 93, 0.31);
     border-bottom:1px solid black;
-
 }
 
 .main  td{
-    valign:center;
     width:calc(100%/ 4);
 }
 
 
 .main tr:hover{
     background:#ccc;
+    cursor:pointer;
 }
 
 .main tr:focus {
-    background: #6d9ecc;
+    background: #bbbd95;
     outline: none;
 }
-
-
-
-
 
 .taskList{
     text-align:left;
@@ -52,10 +43,11 @@
 
 .clear{
     clear:both;
+    display:inline-block;
 }
 
 .addBtn{
-    margin:5px;
+    margin:5px !important;
     float:left;
     width:20px;
     height:20px;
@@ -63,34 +55,33 @@
 }
 
 .addForm{
+    display:block;
     position:relative;
     box-sizing:inherit;
     width:200px;
     background-color:white;
     border:1px solid black;
-    border-radius:15px;
-    float:left;
+    border-radius:0 15px 15px 0;
     margin-top:-1px;
     margin-right:-20px;
     z-index:6;
 }
 
 .details{
-
     padding-left:25px;
-    /*width:80%;*/
-    float:left;
-    width:80%;
+    width:calc(100% - 55px);
+    position:relative;
+    display:inline-block;
+    right:0;
     text-align:left;
-    background-color: rgba(208, 91, 72, 0.51);
+    background-color: rgba(214, 170, 54, 0.33);
     z-index:5;
     margin:0;
-    position:relative;
 }
 
 
-
 .Btn {
+    margin-right:2px;
     background-color: #dadada;
     border-radius:10px;
     color:#fff;
@@ -100,7 +91,10 @@
     cursor:pointer;
     text-decoration:none;
 }
-.Btn:hover { background: rgb(53, 167, 110); }
+.Btn:hover {
+    background: rgb(53, 167, 110);
+    transition:all 0.2s ease-in-out;
+}
 
 .Btn:active {
     background: rgb(33,147,90);

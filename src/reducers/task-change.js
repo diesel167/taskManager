@@ -22,12 +22,13 @@ export default function changing (state=initialState,action){
                 tasks: [...state.tasks]
             };
             break;
-        /*case "TASK_CHANGE":
+        case "TASK_EDIT":
+            console.log(state.tasks);
+            state.tasks.splice([action.payload[1]],1,action.payload[0]);
             return  {
-                ...state,
-                tasks: [...state.tasks, action.payload]
+                tasks: [...state.tasks]
             };
-            break;*/
+            break;
         default:
             return state;
     }
