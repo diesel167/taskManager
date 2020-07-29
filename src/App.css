@@ -1,48 +1,95 @@
+@font-face {
+    font-family: 'Open Sans';
+    src:
+            url('./fonts/Open Sans/OpenSans-Regular.ttf') format('truetype');
+    font-style: normal;
+}
+
 
 .App {
-  text-align: center;
+    text-align: center;
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-size: calc(12px + 6*(100vw / 1280));
+    font-family: "Open Sans", sans-serif;
 }
 body{
-    background-color: rgba(82, 199, 255, 0.17);
+    overflow: hidden;
 }
-
+.App:before{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%;
+    max-width: 100vw;
+    height: 160%;
+    content: '';
+    background: url(./svg/background1.svg) no-repeat;
+    background-size:200%;
+    z-index: -5;
+}
 .box{
-  position:relative;
+    padding: 2%;
+}
+.taskList{
+    position: relative;
+    text-align:center;
+    max-width: 1280px;
+    min-width: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 10px auto;
+    color: #242424;
 }
 
 .main {
-    max-width:1024px;
-    border-spacing:0;
-    margin:0 auto;
+    position: relative;
+    width: 100%;
+    border-spacing: 0;
+    margin: 0 auto;
 }
+
 .main th{
-    height:30px;
+    height:50px;
     text-align: left;
     color: #fff;
-    background-color: #706d97;
+    background-color: rgba(112, 109, 151, 0.48);
+    padding-left: 3%;
+}
+.main th:last-child{
+    padding-left: 0;
+    padding-right: 5px;
 }
 
-.main thead>tr{
-    border-bottom:1px solid black;
-}
-
-.main  td{
-    height: 50px;
-    width:calc(100%/ 4);
+.main tr td{
+    height: auto;
+    width: 30%;
     border-bottom: 1px solid #eee;
+    text-align: left;
+    padding-left: 3%;
+    position: relative;
 }
-
-
+.main tr td:last-child{
+    width: 10% !important;
+    padding-left: 0;
+}
 .main tr:hover{
     background:#ccc;
     cursor:pointer;
 }
 
+
+
 tr:nth-child(n+1) {
-    background-color: #eceec7;
+    background-color: rgba(236, 238, 199, 0.65);
 }
 tr:nth-child(odd) {
-    background-color: #eee;
+    background-color: rgba(238, 238, 238, 0.58);
+}
+.main tr:last-child td{
+    border-bottom: none;
 }
 
 .main tr:focus {
@@ -50,36 +97,85 @@ tr:nth-child(odd) {
     outline: none;
 }
 
-.taskList{
-    text-align:left;
-    border:1px solid black;
-}
+
 
 .clear{
     clear:both;
     display:inline-block;
 }
 
+.box{
+    position: relative;
+}
 .addBtn{
     margin:5px !important;
     float:left;
-    width:20px;
-    height:20px;
-    line-height:20px;
+    width:50px;
+    height:50px;
+    line-height:50px;
+    font-size: 50px;
+    color: rgba(36, 36, 36, 0.75);
 }
-
+.addBtn:hover{
+    background-color: rgba(187, 189, 149, 0.47) !important;
+    color: #242424;
+}
+.popup:before{
+    position: absolute;
+    display: block;
+    content: '';
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background-color: black;
+    opacity: .5;
+}
 .addForm{
     display:block;
-    position:relative;
-    box-sizing:inherit;
-    width:200px;
-    background-color:white;
-    border:1px solid black;
+    position:absolute;
+    top: 10%;
+    left: calc(50% - 125px);
+    width:250px;
+    background-color: rgba(255, 255, 255, 0.87);
     margin-top:-1px;
     margin-right:-20px;
     z-index:6;
+    border-radius: 25px;
+    padding-top: 15px;
 }
-
+.addForm textarea, input{
+    border-radius: 5px;
+    border: none;
+    resize: none;
+    width: 80%
+}
+.addForm .Btn{
+    background: url("./img/checked.png") no-repeat;
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    font-size: 16px;
+}
+.close{
+    position: absolute;
+    right: 16px;
+    top: 5px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 25px;
+    line-height: 20px;
+    color: #242424;
+}
+.close:hover{
+    color: rgba(36, 36, 36, 0.73);
+}
+.submit{
+    margin: 5px auto !important;
+}
 .details{
     padding-left:25px;
     width:calc(100% - 55px);
@@ -91,26 +187,47 @@ tr:nth-child(odd) {
     z-index:5;
     margin:0;
 }
-
-
 .Btn {
-    margin-right:2px;
-    background-color: #dadada;
-    color:#fff;
     border: 0;
-    font-weight:200;
-    text-transform:uppercase;
+    padding: 0;
+    margin: 2px 5px;
     cursor:pointer;
-    text-decoration:none;
+    position: relative;
+    background-color: transparent;
 }
 .Btn:hover {
-    background: rgb(53, 167, 110);
+    background-color: rgba(33, 147, 90, 0.4);
     transition:all 0.2s ease-in-out;
 }
-
-.Btn:active {
-    background: rgb(33,147,90);
-    box-shadow: 0 3px rgb(33,147,90) inset;
+.delete:hover {
+    background-color: rgba(252, 25, 21, 0.4);
+    transition:all 0.2s ease-in-out;
+}
+.Btn:focus {outline:none !important;}
+.delete{
+    background: url("./img/delete1.png") no-repeat;
+    background-size: 100%;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+}
+.edit{
+    background: url("./img/edit1.png") no-repeat;
+    background-size: 140%;
+    background-position: -5px -5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
 }
 
-.Btn:focus {outline:none !important;}
+
+@media screen and (max-width: 560px){
+    .main td{
+        min-height: 70px;
+        padding-left: 10px;
+    }
+    .main .Btn{
+        display: block;
+        margin: 5px;
+    }
+}

@@ -47,11 +47,11 @@ class MainPage extends Component {
             cells.push(<td>{task.task_title}</td>);
             cells.push(<td>{task.assignee}</td>);
             cells.push(<td>{task.deadline}</td>);
-            cells.push(<td><button className="Btn" onClick={(e)=>{
+            cells.push(<td><button className="Btn delete" onClick={(e)=>{
                 this.props.deleteTask(i);
                 this.props.select('');
                 e.stopPropagation();
-            }}>delete</button><button className="Btn" onClick={()=>{
+            }}/><button className="Btn edit" onClick={()=>{
                 this.setState({
                     i:i,
                     task_id:task.task_id,
@@ -62,8 +62,9 @@ class MainPage extends Component {
                     editTaskVisible: true,
                     addTaskVisible: false,
                 });
-            }}>edit</button></td>);
+            }}/></td>);
             rows.push(<tr tabIndex="0" onClick={()=>{this.props.select(task)}}>{cells}</tr>);    //join filled cells  container to rows container (join a row)
+            return 1
         });
 
         return(
@@ -78,7 +79,6 @@ class MainPage extends Component {
         return(
             <div className="box">
                 <div className="taskList">{this.createTable()}</div>
-                <div className="oneLine">
                     {
                         (!(this.state.addTaskVisible||this.state.editTaskVisible))
                             ? <button className="Btn addBtn" onClick={()=>{
@@ -93,6 +93,7 @@ class MainPage extends Component {
                     {
                         !this.state.editTaskVisible
                             ?null:
+                            <div className="popup">
                                 <div className="addForm">
                                     <EditTask taskName={this.state.taskName}
                                               changEditTaskVisible={this.changeEditTaskVisible}
@@ -102,13 +103,14 @@ class MainPage extends Component {
                                               date={this.state.date}
                                               description={this.state.description}/>
                                 </div>
+                            </div>
+
                     }
                     {
                         this.state.addTaskVisible
-                            ? <div className="addForm"><AddTask changeAddTaskVisible={this.changeAddTaskVisible}/></div>
+                            ? <div className="popup"><div className="addForm"><AddTask changeAddTaskVisible={this.changeAddTaskVisible}/></div></div>
                             : null
                     }
-                </div>
             </div>
         )
     }

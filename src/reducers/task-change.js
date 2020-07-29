@@ -11,20 +11,17 @@ export default function changing (state=initialState,action){
             return  {
                 tasks: [...state.tasks,newTask]
             };
-            break;
         case "TASK_DELETE":
             state.tasks.splice(action.payload,1);
             return  {
                 tasks: [...state.tasks]
             };
-            break;
         case "TASK_EDIT":
             console.log(state.tasks);
             state.tasks.splice([action.payload[1]],1,action.payload[0]);
             return  {
                 tasks: [...state.tasks]
             };
-            break;
         default:
             return state;
     }

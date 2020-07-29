@@ -5,10 +5,7 @@ import {add, editTask} from "../actions";
 
 
 
-//do 01..09 format for 1..9
-function addZero(n) {
-    return n > 9 ? n : '0' + n ;
-}
+
 
 class EditTask extends Component{
 
@@ -26,6 +23,7 @@ class EditTask extends Component{
         this.onDateChange = this.onDateChange.bind(this);
         this.onResponsibleChange = this.onResponsibleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClose = this.onClose.bind(this);
     }
 
 
@@ -57,10 +55,14 @@ class EditTask extends Component{
         this.props.editTask(newTask,this.props.i);
         event.preventDefault();
     }
+    onClose(){
+        this.props.changEditTaskVisible(); //hide AddTask component
+    }
 
     render(){
         return(<form onSubmit={this.onSubmit}>
             <div>
+                <div className="close" onClick={this.onClose}>&#215;</div>
                 <div>Task name:<textarea className="tasktext" name="com" rows="1" onChange={this.onTaskNameChange}  value={this.state.taskName}/> </div>
                 <br/>
                 <div>Description:<textarea  name="com" rows="2" onChange={this.onDescriptionChange}  value={this.state.description}/> </div>
@@ -68,8 +70,7 @@ class EditTask extends Component{
                 <div>Assignee:<textarea  name="com" rows="1" onChange={this.onResponsibleChange}  value={this.state.assignee}/> </div>
                 <label>Deadline:<input  type="date" name="date" value={this.state.date} onChange={this.onDateChange}/></label>
             </div>
-            <p><input className="Btn" type="submit" value="Submit"/>
-            </p>
+            <div className="Btn submit" onClick={this.onSubmit}/>
         </form>)
     }
 }

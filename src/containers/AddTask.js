@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
-import {add, select} from "../actions";
+import {add} from "../actions";
 
 
 let date=new Date();
@@ -26,6 +26,7 @@ class AddTask extends Component{
         this.onDateChange = this.onDateChange.bind(this);
         this.onResponsibleChange = this.onResponsibleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onClose = this.onClose.bind(this);
     }
     onTaskNameChange(event){
         this.setState({taskName: event.target.value});
@@ -54,10 +55,13 @@ class AddTask extends Component{
         this.props.add(newTask);
         event.preventDefault();
     }
-
+    onClose(){
+        this.props.changeAddTaskVisible(); //hide AddTask component
+    }
     render(){
         return(<form onSubmit={this.onSubmit}>
                     <div>
+                        <div className="close" onClick={this.onClose}>&#215;</div>
                         <div>Task name:<textarea className="tasktext" name="com" rows="1" onChange={this.onTaskNameChange}  value={this.state.taskName}/> </div>
                         <br/>
                         <div>Description:<textarea  name="com" rows="2" onChange={this.onDescriptionChange}  value={this.state.description}/> </div>
@@ -65,8 +69,7 @@ class AddTask extends Component{
                         <div>Assignee:<textarea  name="com" rows="1" onChange={this.onResponsibleChange}  value={this.state.responsible}/> </div>
                         <label>Deadline:<input  type="date" name="date" value={this.state.date} onChange={this.onDateChange}/></label>
                     </div>
-                    <p><input className="Btn" type="submit" value="Submit"/>
-                    </p>
+                    <div className="Btn submit" onClick={this.onSubmit}/>
                </form>)
     }
 }
