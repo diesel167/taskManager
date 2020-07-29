@@ -1,5 +1,6 @@
 {
   "name": "react-redux-app",
+  "homepage": "https://diesel167.github.io/taskManager/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
