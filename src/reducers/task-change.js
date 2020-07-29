@@ -4,7 +4,6 @@ import initialState from './tasks';
 export default function changing (state=initialState,action){
     switch (action.type){
         case "TASK_ADD":
-
             let newTask = action.payload;
             (state.tasks.length===0)
                 ? newTask.task_id=0
@@ -13,11 +12,8 @@ export default function changing (state=initialState,action){
                 tasks: [...state.tasks,newTask]
             };
             break;
-
         case "TASK_DELETE":
-
             state.tasks.splice(action.payload,1);
-            console.log(state.tasks);
             return  {
                 tasks: [...state.tasks]
             };

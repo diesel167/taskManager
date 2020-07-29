@@ -47,8 +47,10 @@ class MainPage extends Component {
             cells.push(<td>{task.task_title}</td>);
             cells.push(<td>{task.assignee}</td>);
             cells.push(<td>{task.deadline}</td>);
-            cells.push(<td><button className="Btn" onClick={()=>{
+            cells.push(<td><button className="Btn" onClick={(e)=>{
                 this.props.deleteTask(i);
+                this.props.select('');
+                e.stopPropagation();
             }}>delete</button><button className="Btn" onClick={()=>{
                 this.setState({
                     i:i,
@@ -60,9 +62,7 @@ class MainPage extends Component {
                     editTaskVisible: true,
                     addTaskVisible: false,
                 });
-
             }}>edit</button></td>);
-
             rows.push(<tr tabIndex="0" onClick={()=>{this.props.select(task)}}>{cells}</tr>);    //join filled cells  container to rows container (join a row)
         });
 
@@ -75,7 +75,6 @@ class MainPage extends Component {
     };
 
     render() {
-        console.log(!this.state.addTaskVisible||!this.state.editTaskVisible)
         return(
             <div className="box">
                 <div className="taskList">{this.createTable()}</div>
@@ -103,17 +102,13 @@ class MainPage extends Component {
                                               date={this.state.date}
                                               description={this.state.description}/>
                                 </div>
-
                     }
                     {
                         this.state.addTaskVisible
                             ? <div className="addForm"><AddTask changeAddTaskVisible={this.changeAddTaskVisible}/></div>
                             : null
                     }
-
                 </div>
-
-
             </div>
         )
     }

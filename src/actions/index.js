@@ -7,7 +7,6 @@ export const select = (task) =>{
     }
 };
 
-
 export const add = (newTask) =>{
     return{
         type:"TASK_ADD",
